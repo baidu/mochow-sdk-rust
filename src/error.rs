@@ -104,6 +104,18 @@ impl From<StatsTableArgsBuilderError> for SdkError {
     }
 }
 
+impl From<AliasTableArgsBuilderError> for SdkError {
+    fn from(value: AliasTableArgsBuilderError) -> Self {
+        SdkError::OtherError(value.into())
+    }
+}
+
+impl From<UnaliasTableArgsBuilderError> for SdkError {
+    fn from(value: UnaliasTableArgsBuilderError) -> Self {
+        SdkError::OtherError(value.into())
+    }
+}
+
 impl From<DescriptIndexArgsBuilderError> for SdkError {
     fn from(value: DescriptIndexArgsBuilderError) -> Self {
         SdkError::OtherError(value.into())
