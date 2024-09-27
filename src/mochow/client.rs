@@ -270,33 +270,35 @@ impl MochowClient {
     }
 
     /// alias table
-    /// ```rust
-    /// use mochow_rust_sdk::mochow::api::{AliasTableArgsBuilder};
-    /// let args = AddFieldArgsBuilder::default()
-    ///     .database("test_db")
-    ///     .table("test_table")
-    ///     .alias("table_alias1")
-    ///     .build()?;
-    /// let ret = client.add_field(&args).await?;
-    /// ```
-    pub async fn alias_table(&self, args: &AliasTableArgs) -> Result<CommonResponse, SdkError> {
-        let req = self.prepare_request(args.clone());
+    pub async fn alias_table(
+        &self,
+        data_base: &str,
+        table: &str,
+        alias: &str,
+    ) -> Result<CommonResponse, SdkError> {
+        let args = AliasTableArgsBuilder::default()
+            .database(data_base)
+            .table(table)
+            .alias(alias)
+            .build()?;
+        let req = self.prepare_request(args);
         let res = req.send_and_log().await?;
         Ok(res.json::<CommonResponse>().await?)
     }
 
     /// unalias table
-    /// ```rust
-    /// use mochow_rust_sdk::mochow::api::{UnaliasTableArgsBuilder};
-    /// let args = AddFieldArgsBuilder::default()
-    ///     .database("test_db")
-    ///     .table("test_table")
-    ///     .alias("table_alias1")
-    ///     .build()?;
-    /// let ret = client.add_field(&args).await?;
-    /// ```
-    pub async fn unalias_table(&self, args: &UnaliasTableArgs) -> Result<CommonResponse, SdkError> {
-        let req = self.prepare_request(args.clone());
+    pub async fn unalias_table(
+        &self,
+        data_base: &str,
+        table: &str,
+        alias: &str,
+    ) -> Result<CommonResponse, SdkError> {
+        let args = UnaliasTableArgsBuilder::default()
+            .database(data_base)
+            .table(table)
+            .alias(alias)
+            .build()?;
+        let req = self.prepare_request(args);
         let res = req.send_and_log().await?;
         Ok(res.json::<CommonResponse>().await?)
     }

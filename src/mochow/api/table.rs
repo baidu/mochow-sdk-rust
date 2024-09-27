@@ -616,24 +616,18 @@ mod tests {
 
     #[tokio::test]
     async fn test_alias_table() -> Result<()> {
-        let args = AliasTableArgsBuilder::default()
-            .database("book")
-            .table("book_segments")
-            .alias("table_alias1")
-            .build()?;
-        let ret = UTCLIENT.alias_table(&args).await?;
+        let ret = UTCLIENT
+            .alias_table("book", "book_segments", "table_alias1")
+            .await?;
         println!("{:?}", ret);
         Ok(())
     }
 
     #[tokio::test]
     async fn test_unalias_table() -> Result<()> {
-        let args = UnaliasTableArgsBuilder::default()
-            .database("book")
-            .table("book_segments")
-            .alias("table_alias1")
-            .build()?;
-        let ret = UTCLIENT.unalias_table(&args).await?;
+        let ret = UTCLIENT
+            .unalias_table("book", "book_segments", "table_alias1")
+            .await?;
         println!("{:?}", ret);
         Ok(())
     }
